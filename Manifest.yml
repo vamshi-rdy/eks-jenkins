@@ -26,12 +26,51 @@ spec:
         ports:
         - containerPort: 80
         resources:                                                       # Specifies resource requests and limits for the container.
-            requests:                                                      # Minimum resources required for the container (512Mi of memory and 500m CPU).
-              memory: "512Mi"
-              cpu: "500m"
-            limits:                                                        # Maximum resources the container can consume (1Gi of memory and 1 CPU).
-              memory: "1Gi"
-              cpu: "1"
+          requests:                                                      # Minimum resources required for the container (512Mi of memory and 500m CPU).
+            memory: "128Mi"
+            cpu: "100m"
+          limits:                                                        # Maximum resources the container can consume (1Gi of memory and 1 CPU).
+            memory: "256Mi"
+            cpu: "250m"
+      volumes:                                                            # Defines volumes to be used by the containers.
+        # - name: config-volume
+        #   configMap:                                                       # Mounts a ConfigMap called nginx-config to provide the Nginx configuration.
+        #     name: nginx-config
+        - name: nginx-log-volume                                           # Uses a Persistent Volume Claim (nginx-pvc) for persistent storage of logs.
+          persistentVolumeClaim:
+            claimName: nginx-pvc
+
+---
+# PersistentVolume
+# ----------------------------
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nginx-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  #hostPath:
+  #  path: /mnt/data/app
+---
+# ----------------------------
+# PersistentVolumeClaim
+# ----------------------------
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard  
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
