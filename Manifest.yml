@@ -63,17 +63,17 @@ spec:
 # ----------------------------
 # PersistentVolumeClaim
 # ----------------------------
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nginx-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: gp2  
-  resources:
-    requests:
-      storage: 1Gi
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: nginx-pvc
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: gp2  
+#   resources:
+#     requests:
+#       storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
