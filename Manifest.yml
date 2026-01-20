@@ -32,16 +32,16 @@ spec:
           limits:                                                        # Maximum resources the container can consume (1Gi of memory and 1 CPU).
             memory: "256Mi"
             cpu: "250m"
-        volumeMounts:
-        - name: nginx-log-volume
-          mountPath: /var/log/nginx    
-      volumes:                                                            # Defines volumes to be used by the containers.
-        # - name: config-volume
-        #   configMap:                                                       # Mounts a ConfigMap called nginx-config to provide the Nginx configuration.
-        #     name: nginx-config
-        - name: nginx-log-volume                                           # Uses a Persistent Volume Claim (nginx-pvc) for persistent storage of logs.
-          persistentVolumeClaim:
-            claimName: nginx-pvc
+      #   volumeMounts:
+      #   - name: nginx-log-volume
+      #     mountPath: /var/log/nginx    
+      # volumes:                                                            # Defines volumes to be used by the containers.
+      #   # - name: config-volume
+      #   #   configMap:                                                       # Mounts a ConfigMap called nginx-config to provide the Nginx configuration.
+      #   #     name: nginx-config
+      #   - name: nginx-log-volume                                           # Uses a Persistent Volume Claim (nginx-pvc) for persistent storage of logs.
+      #     persistentVolumeClaim:
+      #       claimName: nginx-pvc
 
 ---
 # PersistentVolume
