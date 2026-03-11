@@ -32,6 +32,24 @@ spec:
           limits:                                                        # Maximum resources the container can consume (1Gi of memory and 1 CPU).
             memory: "256Mi"
             cpu: "250m"
+        livenessProbe:                                                   # A health check to determine if the container is still running and healthy.
+            httpGet:                                                       # Sends an HTTP GET request to /healthz on port 80.
+              path: /healthz                                               
+              port: 80
+            initialDelaySeconds: 5                                         # Waits for 5 seconds before starting the probe.
+            periodSeconds: 10                                              # Runs the probe every 10 seconds.
+        readinessProbe:                                                  # Ensures that the container is ready to serve traffic. Similar to the liveness probe, but used to determine if the container is ready.
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 5                                        # Waits for 5 seconds before starting the probe.
+            periodSeconds: 10                                             # Runs the probe every 10 seconds.
+        startupProbe:                                                   # Ensures the container has started successfully before performing liveness or readiness checks.
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 10                                       # Waits for 10 seconds before starting the probe.
+            periodSeconds: 5     
       #   volumeMounts:
       #   - name: nginx-log-volume
       #     mountPath: /var/log/nginx    
