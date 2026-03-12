@@ -41,8 +41,8 @@ spec:
             periodSeconds: 10                                              # Runs the probe every 10 seconds.
         readinessProbe:                                                  # Ensures that the container is ready to serve traffic. Similar to the liveness probe, but used to determine if the container is ready.
             httpGet:
-              path: /
-         #     path: /healthz
+         #     path: /
+              path: /healthz
               port: 80
             initialDelaySeconds: 5                                        # Waits for 5 seconds before starting the probe.
             periodSeconds: 10                                             # Runs the probe every 10 seconds.
