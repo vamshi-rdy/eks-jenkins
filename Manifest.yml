@@ -46,7 +46,8 @@ spec:
             periodSeconds: 10                                             # Runs the probe every 10 seconds.
         startupProbe:                                                   # Ensures the container has started successfully before performing liveness or readiness checks.
             httpGet:
-              path: /health
+              path: /
+        #      path: /health
               port: 80
             initialDelaySeconds: 10                                       # Waits for 10 seconds before starting the probe.
             periodSeconds: 5     
